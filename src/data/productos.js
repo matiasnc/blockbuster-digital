@@ -6,7 +6,7 @@ export const productos = [
     titulo: "Matrix",
     genero: "Ciencia Ficción",
     precio: 1500,
-    imagen: "https://placehold.co/300x450/1a1a1a/FFF?text=The+Matrix",
+    imagen: "https://placehold.co/300x450/1a1a1a/FFF?text=Matrix",
     sinopsis: "Un experto en computadoras descubre que su mundo es una simulación total creada con maliciosas intenciones por parte de la ciberinteligencia.",
     stock: 5
   },
@@ -15,7 +15,7 @@ export const productos = [
     titulo: "El Señor de los Anillos",
     genero: "Fantasía",
     precio: 1800,
-    imagen: "https://placehold.co/300x450/1a1a1a/FFF?text=El+Senor+de+los+Anillos",
+    imagen: "https://placehold.co/300x450/1a1a1a/FFF?text=El+Señor+de+los+Anillos",
     sinopsis: "Un hobbit de la Comarca y ocho compañeros emprenden un viaje para destruir el poderoso Anillo Único y salvar la Tierra Media del Señor Oscuro Sauron.",
     stock: 3
   },
@@ -105,7 +105,7 @@ export const productos = [
     titulo: "Avengers: Infinity War",
     genero: "Acción",
     precio: 1900,
-    imagen: "https://placehold.co/300x450/1a1a1a/FFF?text=Avengers",
+    imagen: "https://placehold.co/300x450/1a1a1a/FFF?text=Avengers+:+Infinity+War",
     sinopsis: "Los Vengadores y sus aliados deben estar dispuestos a sacrificarlo todo para derrotar al poderoso Thanos antes de que destruya el universo.",
     stock: 15
   }
