@@ -3,7 +3,7 @@ import Header from './components/Header';
 import Inicio from './pages/Inicio';
 import './App.css';
 
-// import Productos from './pages/Productos';
+import Productos from './pages/Productos';
 // import DetalleProducto from './pages/DetalleProducto';
 // import Carrito from './pages/Carrito';
 // import Contacto from './pages/Contacto';
@@ -18,7 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Inicio />} />
           {/* Dejo las rutas comentadas para que las vayamos habilitando a medida que creamos los archivos */}
-          {/* <Route path="/catalogo" element={<Productos />} /> */}
+          { <Route path="/catalogo" element={<Productos />} /> }
           {/* <Route path="/pelicula/:id" element={<DetalleProducto />} /> */}
           {/* <Route path="/carrito" element={<Carrito />} /> */}
           {/* <Route path="/contacto" element={<Contacto />} /> */}
