@@ -6,7 +6,7 @@ import './App.css';
 import Productos from './pages/Productos';
 // import DetalleProducto from './pages/DetalleProducto';
 // import Carrito from './pages/Carrito';
-// import Contacto from './pages/Contacto';
+import Contacto from './pages/Contacto';
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
           { <Route path="/catalogo" element={<Productos />} /> }
           {/* <Route path="/pelicula/:id" element={<DetalleProducto />} /> */}
           {/* <Route path="/carrito" element={<Carrito />} /> */}
-          {/* <Route path="/contacto" element={<Contacto />} /> */}
+          { <Route path="/contacto" element={<Contacto />} /> }
         </Routes>
       </main>
     </BrowserRouter>
