@@ -1,156 +1,107 @@
 import { useState } from 'react';
-import { Form, Button, Container, Alert, Spinner } from 'react-bootstrap';
+import { Container, Form, Button, Alert, Card } from 'react-bootstrap';
+import InputGroup from '../components/InputGroup';
+import MensajeExito from '../components/MensajeExito';
 
-const Contacto = () => {
-  // 1. Estado para guardar los datos del formulario
+const Contacto = ({ cart = [] }) => {
+  // 1. Quitamos "metodoEntrega" del estado inicial
   const [formData, setFormData] = useState({
-    nombre: '',
+    nombreApellido: '',
     email: '',
+    telefono: '',
+    direccion: '',
     mensaje: ''
   });
 
-  // 2. Estado para manejar errores y feedback visual
-  const [errores, setErrores] = useState({});
-  const [enviando, setEnviando] = useState(false);
-  const [enviadoExitosamente, setEnviadoExitosamente] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Función para actualizar el estado cuando el usuario escribe
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-    // Limpiamos el error de ese campo si el usuario empieza a escribir de nuevo
-    if (errores[name]) {
-      setErrores({ ...errores, [name]: null });
-    }
+    setFormData({ ...formData, [name]: value });
+    if (errors[name]) setErrors({ ...errors, [name]: null });
   };
 
-  // Función para validar los datos antes de enviar
-  const validarFormulario = () => {
-    const nuevosErrores = {};
-    
-    if (!formData.nombre.trim()) {
-      nuevosErrores.nombre = 'El nombre es obligatorio.';
-    }
-    
-    if (!formData.email.trim()) {
-      nuevosErrores.email = 'El correo electrónico es obligatorio.';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      nuevosErrores.email = 'Ingresa un correo electrónico válido.';
-    }
-    
-    if (!formData.mensaje.trim()) {
-      nuevosErrores.mensaje = 'El mensaje no puede estar vacío.';
-    }
+  const validate = () => {
+    let newErrors = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    return nuevosErrores;
+    if (!formData.nombreApellido.trim()) newErrors.nombreApellido = 'El nombre y apellido son obligatorios.';
+    if (!formData.email.trim()) newErrors.email = 'El email es obligatorio.';
+    else if (!emailRegex.test(formData.email)) newErrors.email = 'El formato del email no es válido.';
+    if (!formData.telefono.trim()) newErrors.telefono = 'El teléfono es obligatorio.';
+    if (!formData.direccion.trim()) newErrors.direccion = 'La dirección o localidad es obligatoria.';
+    
+    // Validación del carrito (mantenida por requerimiento de la consigna)
+    if (cart.length === 0) newErrors.carrito = 'No puedes enviar la consulta si el carrito está vacío.';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
-  // Función que se ejecuta al enviar el formulario
   const handleSubmit = (e) => {
-    e.preventDefault(); // Evita que la página se recargue
-    
-    const erroresValidacion = validarFormulario();
-    
-    if (Object.keys(erroresValidacion).length > 0) {
-      setErrores(erroresValidacion);
-      return;
-    }
-
-    // Si no hay errores, simulamos el envío (Aquí conectarías tu backend o EmailJS)
-    setEnviando(true);
-    
-    setTimeout(() => {
-      setEnviando(false);
-      setEnviadoExitosamente(true);
-      // Vaciamos el formulario
-      setFormData({ nombre: '', email: '', mensaje: '' });
-      
-      // Ocultamos el mensaje de éxito después de 5 segundos
-      setTimeout(() => setEnviadoExitosamente(false), 5000);
-    }, 2000); // Simulamos 2 segundos de carga
+    e.preventDefault();
+    if (validate()) setIsSubmitted(true);
   };
+
+  if (isSubmitted) return <MensajeExito nombre={formData.nombreApellido} />;
 
   return (
-    <Container className="py-5" style={{ maxWidth: '600px' }}>
-      <h2 className="mb-4 text-center">Contáctanos</h2>
-
-      {/* Alerta de éxito */}
-      {enviadoExitosamente && (
-        <Alert variant="success">
-          ¡Gracias por escribirnos! Tu mensaje ha sido enviado correctamente.
+    <Container className="py-5" style={{ maxWidth: '650px' }}>
+      <h2 className="text-center mb-4 fw-bold text-dark">Contacto</h2>
+      
+      {errors.carrito && (
+        <Alert variant="danger" className="text-center fw-bold">
+          {errors.carrito}
         </Alert>
       )}
 
-      <Form onSubmit={handleSubmit} noValidate>
-        {/* Campo Nombre */}
-        <Form.Group className="mb-3" controlId="formNombre">
-          <Form.Label>Nombre completo</Form.Label>
-          <Form.Control 
-            type="text" 
-            placeholder="Ej. Juan Pérez" 
-            name="nombre"
-            value={formData.nombre}
-            onChange={handleChange}
-            isInvalid={!!errores.nombre}
-          />
-          <Form.Control.Feedback type="invalid">
-            {errores.nombre}
-          </Form.Control.Feedback>
-        </Form.Group>
+      <Card className="shadow-sm border-0">
+        <Card.Body className="p-4">
+          <Form onSubmit={handleSubmit}>
+            
+            <InputGroup 
+              label="Nombre y Apellido *" name="nombreApellido" 
+              value={formData.nombreApellido} onChange={handleChange} error={errors.nombreApellido} 
+              placeholder="Ej. Juan Pérez"
+            />
+            <InputGroup 
+              label="Email *" type="email" name="email" 
+              value={formData.email} onChange={handleChange} error={errors.email} 
+              placeholder="ejemplo@correo.com"
+            />
+            <InputGroup 
+              label="Teléfono *" type="tel" name="telefono" 
+              value={formData.telefono} onChange={handleChange} error={errors.telefono} 
+              placeholder="Ej. +54 11 1234-5678"
+            />
+            <InputGroup 
+              label="Dirección / Localidad *" name="direccion" 
+              value={formData.direccion} onChange={handleChange} error={errors.direccion} 
+              placeholder="Ej. Av. Falsa 123, CABA"
+            />
 
-        {/* Campo Email */}
-        <Form.Group className="mb-3" controlId="formEmail">
-          <Form.Label>Correo Electrónico</Form.Label>
-          <Form.Control 
-            type="email" 
-            placeholder="tu@email.com" 
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            isInvalid={!!errores.email}
-          />
-          <Form.Control.Feedback type="invalid">
-            {errores.email}
-          </Form.Control.Feedback>
-        </Form.Group>
+            <Form.Group className="mb-4" controlId="mensaje">
+              <Form.Label className="fw-bold">Mensaje o Consulta</Form.Label>
+              <Form.Control 
+                as="textarea" rows={4} name="mensaje" 
+                value={formData.mensaje} onChange={handleChange} 
+                placeholder="Escribe tu consulta aquí..."
+              />
+            </Form.Group>
 
-        {/* Campo Mensaje */}
-        <Form.Group className="mb-4" controlId="formMensaje">
-          <Form.Label>Mensaje</Form.Label>
-          <Form.Control 
-            as="textarea" 
-            rows={4} 
-            placeholder="¿En qué te podemos ayudar?" 
-            name="mensaje"
-            value={formData.mensaje}
-            onChange={handleChange}
-            isInvalid={!!errores.mensaje}
-          />
-          <Form.Control.Feedback type="invalid">
-            {errores.mensaje}
-          </Form.Control.Feedback>
-        </Form.Group>
-
-        {/* Botón de Enviar */}
-        <Button 
-          variant="primary" 
-          type="submit" 
-          className="w-100" 
-          disabled={enviando}
-        >
-          {enviando ? (
-            <>
-              <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" className="me-2" />
-              Enviando...
-            </>
-          ) : (
-            'Enviar Mensaje'
-          )}
-        </Button>
-      </Form>
+            <Button 
+              variant="primary" 
+              type="submit" 
+              size="lg"
+              className="w-100 fw-bold mt-2" 
+              disabled={cart.length === 0}
+            >
+              Enviar Mensaje
+            </Button>
+          </Form>
+        </Card.Body>
+      </Card>
     </Container>
   );
 };
