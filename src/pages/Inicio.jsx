@@ -1,6 +1,7 @@
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { productos } from "../data/productos";
+import  imagenPrincipal  from "../assets/imagenPrincipal.jpeg";
 
 function Inicio() {
   return (
@@ -38,8 +39,8 @@ function Inicio() {
             {/* Imagen principal */}
             <Col md={6}>
               <img
-                src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba" 
-                alt="Banner principal"
+                src= {imagenPrincipal}
+                alt="Imagen principal"
                 className="img-fluid rounded"
               />
             </Col>
