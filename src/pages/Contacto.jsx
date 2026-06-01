@@ -78,7 +78,7 @@ const Contacto = () => {
             />
 
             <Form.Group className="mb-4" controlId="mensaje">
-              <Form.Label className="fw-bold">Mensaje o Consulta (Opcional)</Form.Label>
+              <Form.Label className="fw-bold">Mensaje o Consulta</Form.Label>
               <Form.Control 
                 as="textarea" rows={4} name="mensaje" 
                 value={formData.mensaje} onChange={handleChange} 
