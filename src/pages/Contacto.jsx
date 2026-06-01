@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Container, Form, Button, Alert, Card } from 'react-bootstrap';
+import { Container, Form, Button, Card } from 'react-bootstrap';
 import InputGroup from '../components/InputGroup';
 import MensajeExito from '../components/MensajeExito';
 
-const Contacto = ({ cart = [] }) => {
-  // 1. Quitamos "metodoEntrega" del estado inicial
+const Contacto = () => {
+  // Ya no necesitamos recibir el carrito como prop
+
   const [formData, setFormData] = useState({
     nombreApellido: '',
     email: '',
@@ -31,9 +32,6 @@ const Contacto = ({ cart = [] }) => {
     else if (!emailRegex.test(formData.email)) newErrors.email = 'El formato del email no es válido.';
     if (!formData.telefono.trim()) newErrors.telefono = 'El teléfono es obligatorio.';
     if (!formData.direccion.trim()) newErrors.direccion = 'La dirección o localidad es obligatoria.';
-    
-    // Validación del carrito (mantenida por requerimiento de la consigna)
-    if (cart.length === 0) newErrors.carrito = 'No puedes enviar la consulta si el carrito está vacío.';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -41,7 +39,11 @@ const Contacto = ({ cart = [] }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validate()) setIsSubmitted(true);
+    if (validate()) {
+      // Imprimimos por consola para simular el envío
+      console.log("Datos de la consulta:", formData);
+      setIsSubmitted(true);
+    }
   };
 
   if (isSubmitted) return <MensajeExito nombre={formData.nombreApellido} />;
@@ -49,12 +51,6 @@ const Contacto = ({ cart = [] }) => {
   return (
     <Container className="py-5" style={{ maxWidth: '650px' }}>
       <h2 className="text-center mb-4 fw-bold text-dark">Contacto</h2>
-      
-      {errors.carrito && (
-        <Alert variant="danger" className="text-center fw-bold">
-          {errors.carrito}
-        </Alert>
-      )}
 
       <Card className="shadow-sm border-0">
         <Card.Body className="p-4">
@@ -82,7 +78,7 @@ const Contacto = ({ cart = [] }) => {
             />
 
             <Form.Group className="mb-4" controlId="mensaje">
-              <Form.Label className="fw-bold">Mensaje o Consulta</Form.Label>
+              <Form.Label className="fw-bold">Mensaje o Consulta (Opcional)</Form.Label>
               <Form.Control 
                 as="textarea" rows={4} name="mensaje" 
                 value={formData.mensaje} onChange={handleChange} 
@@ -95,7 +91,7 @@ const Contacto = ({ cart = [] }) => {
               type="submit" 
               size="lg"
               className="w-100 fw-bold mt-2" 
-              disabled={cart.length === 0}
+              // ¡El botón ahora está siempre habilitado!
             >
               Enviar Mensaje
             </Button>
