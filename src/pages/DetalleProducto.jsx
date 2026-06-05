@@ -4,7 +4,7 @@ import { Container, Row, Col, Button, Badge, Card } from 'react-bootstrap';
 
 import { productos } from '../data/productos'; 
 
-const DetalleProducto = () => {
+const DetalleProducto = ({agregarAlCarrito}) => {
   const { id } = useParams();
   
   
@@ -90,7 +90,17 @@ const DetalleProducto = () => {
                     size="lg"
                     className="px-4 py-2 fw-bold"
                     disabled={producto.stock === 0}
-                    onClick={() => alert('Próximamente: Lógica del carrito')}
+                    onClick={() => {
+
+                      const agregado = agregarAlCarrito(producto);
+
+                      if (agregado) {
+                        alert('Película agregada al carrito');
+                      } else {
+                        alert('La película ya está en el carrito');
+                      }
+
+                    }}
                   >
                     {producto.stock === 0 ? 'Agotada' : 'Agregar al carrito'}
                   </Button>

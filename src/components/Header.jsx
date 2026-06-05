@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Badge from 'react-bootstrap/Badge';
 import { Link, NavLink } from 'react-router-dom';
 
-function Header() {
+function Header({ carrito }) {
   return (
     <Navbar expand="lg" bg="dark" variant="dark" sticky="top">
       <Container>
@@ -25,7 +25,7 @@ function Header() {
           {/* El carrito a la derecha */}
           <Nav>
             <Nav.Link as={NavLink} to="/carrito">
-              🛒 Carrito <Badge bg="primary">0</Badge>
+              🛒 Carrito <Badge bg="primary">{carrito.length}</Badge>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
