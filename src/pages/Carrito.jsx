@@ -8,7 +8,7 @@
 import { Container, Card, Button, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-function Carrito({ carrito, eliminarDelCarrito }) {
+function Carrito({ carrito, eliminarDelCarrito, finalizarCompra }) {
 
   /*
     Calculamos el total del carrito.
@@ -120,6 +120,7 @@ function Carrito({ carrito, eliminarDelCarrito }) {
           <Button
             variant="success"
             size="lg"
+            onClick={finalizarCompra}
           >
             Finalizar compra
           </Button>

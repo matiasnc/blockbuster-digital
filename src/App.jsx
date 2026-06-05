@@ -40,10 +40,10 @@ function App() {
     );
   };
   
-  /*const finalizarCompra = () => {
+  const finalizarCompra = () => {
     alert("¡Compra realizada con éxito!");
     setCarrito([]);
-  }*/
+  }
 
 
 
@@ -70,7 +70,7 @@ function App() {
           { <Route path="/carrito" element={<Carrito 
           carrito = {carrito}
           eliminarDelCarrito={eliminarDelCarrito}
-          /*finalizarCompra={finalizarCompra}*//>} /> }
+          finalizarCompra={finalizarCompra}/>} /> }
           { <Route path="/contacto" element={<Contacto />} /> }
         </Routes>
       </main>
