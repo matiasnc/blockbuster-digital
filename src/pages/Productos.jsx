@@ -4,9 +4,8 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
-import { productos } from '../data/productos';
 
-function Productos({ agregarAlCarrito }) {
+function Productos({ productos, agregarAlCarrito }) {
   return (
     <Container className="my-5">
       <h2 className="mb-4 text-center">Catálogo de Películas</h2>
@@ -26,6 +25,10 @@ function Productos({ agregarAlCarrito }) {
                 </Card.Text>
                 
                 <h5 className="text-center mb-3">${pelicula.precio}</h5>
+
+                <p className = "text-center">
+                  Stock:{pelicula.stock}
+                </p>
 
                 {/* Renderizado condicional basado en el stock */}
                 {pelicula.stock === 0 ? (
