@@ -13,20 +13,26 @@ function App() {
   // Estado del carrito
   const [carrito, setCarrito] = useState([]);
 
-  // Función para agregar películas al carrito
+  // Se agrega una pelicula al carrito
+
   const agregarAlCarrito = (producto) => {
 
-    // Sirve para verificar si la película ya existe en el carrito
-    const existe = carrito.some(
-      pelicula => pelicula.id === producto.id
-    );
+  // Verificamos si la película ya existe dentro del carrito
+  const existe = carrito.some(
+    pelicula => pelicula.id === producto.id
+  );
 
-    // Solo agrega si no está repetida
-    if (!existe) {
-      setCarrito([...carrito, producto]);
-      return true
-    }
-    return false;
+  // Solo la agregamos si no está repetida
+  if (!existe) {
+    setCarrito([
+      ...carrito,
+      producto
+    ]);
+
+    return true;
+   }
+
+   return false;
   };
 
   
@@ -65,7 +71,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Inicio />} />
           {/* Dejo las rutas comentadas para que las vayamos habilitando a medida que creamos los archivos */}
-          { <Route path="/catalogo" element={<Productos />} /> }
+          { <Route path="/catalogo" element={<Productos agregarAlCarrito={agregarAlCarrito}/>} /> }
           { <Route path="/pelicula/:id" element={<DetalleProducto agregarAlCarrito={agregarAlCarrito} />} /> }
           { <Route path="/carrito" element={<Carrito 
           carrito = {carrito}

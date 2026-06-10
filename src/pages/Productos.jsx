@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { productos } from '../data/productos';
 
-function Productos() {
+function Productos({ agregarAlCarrito }) {
   return (
     <Container className="my-5">
       <h2 className="mb-4 text-center">Catálogo de Películas</h2>
@@ -33,7 +33,15 @@ function Productos() {
                     Agotado
                   </Button>
                 ) : (
-                  <Button variant="primary" className="mb-2">
+                  <Button variant="primary" className="mb-2" onClick={() => {
+                    const agregado = agregarAlCarrito(pelicula);
+                    if(agregado){
+                      alert("Pelicula agregada al carrito.");
+                    } else {
+                      alert("La pelicula ya está en el carrito.");
+                    }
+                  }}
+                  >
                     Alquilar
                   </Button>
                 )}
