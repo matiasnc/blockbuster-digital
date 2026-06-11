@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 
 // Le pasamos la película y, opcionalmente, la función para agregar al carrito
-function TarjetaPelicula({ pelicula, onAlquilar }) {
+function TarjetaPelicula({ pelicula, onAlquilar, tema}) {
   return (
     <Card className="h-100 shadow-sm">
       {/* Portada clickeable con la configuración 'contain' centralizada */}
@@ -12,12 +12,12 @@ function TarjetaPelicula({ pelicula, onAlquilar }) {
           variant="top"
           src={pelicula.imagen}
           alt={pelicula.titulo}
-          style={{ 
-            height: '350px', 
-            objectFit: 'contain', 
+          style={{
+            height: '350px',
+            objectFit: 'contain',
             //este color cambia solo según el tema
-            backgroundColor: 'var(--bs-tertiary-bg)',padding: '10px'
-          }} 
+            backgroundColor: 'var(--bs-tertiary-bg)', padding: '10px'
+          }}
         />
       </Link>
 
@@ -43,13 +43,20 @@ function TarjetaPelicula({ pelicula, onAlquilar }) {
                 Agotado
               </Button>
             ) : (
-              <Button variant="warning" onClick={() => onAlquilar(pelicula)}>
+              <Button variant="warning" className="fw-bold" onClick={() => onAlquilar(pelicula) }>
                 Alquilar
               </Button>
             )
           )}
 
-          <Button as={Link} to={`/pelicula/${pelicula.id}`} variant="dark">
+          <Button
+            as={Link}
+            to={`/pelicula/${pelicula.id}`}
+            // Si el tema es 'dark', usamos 'warning' (amarillo), si es 'light', usamos 'dark' (negro)
+            variant={tema === 'light' ? 'dark' : 'warning'}
+            // Si es amarillo (modo oscuro), forzamos el texto a negro para que se lea bien
+            className={tema === 'light' ? 'fw-bold' : 'text-dark'}
+          >
             Ver detalle
           </Button>
         </div>
