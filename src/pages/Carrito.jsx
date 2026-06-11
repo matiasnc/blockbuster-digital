@@ -34,7 +34,7 @@ function Carrito({ carrito, eliminarDelCarrito, finalizarCompra }) {
         <Button
           as={Link}
           to="/catalogo"
-          variant="primary"
+          variant="warning"
           className="mt-3"
         >
           Ir al catálogo
