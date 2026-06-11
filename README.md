@@ -1,16 +1,107 @@
-# React + Vite
+# 🍿 Blockbuster Digital
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Una aplicación web para el alquiler de películas, inspirada en la clásica experiencia de Blockbuster.
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+🌐 **[Ver página](https://blockbuster-digital-mnc.vercel.app/)**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+
+## 🚀 Características Principales
+
+
+
+* **Catálogo Dinámico:** Visualización de películas en formato grilla utilizando *Cards*.
+
+* **Filtros en Tiempo Real:** Búsqueda por título y filtrado por género.
+
+* **Carrito de Compras Persistente:** Uso de `localStorage` mediante el hook `useEffect` (con técnica de *Lazy Initialization*) para evitar la perdida del carrito al actualizar página.
+
+* **Diseño Responsive:** Interfaz adaptada a celulares, tablets y escritorio con esquema de grillas de React Bootstrap.
+
+* **Formulario de Contacto Controlado:** Manejo de estado dinámico (`onChange`) y validaciones robustas antes del envío (`onSubmit`).
+
+* **UX:** Alertas modernas y personalizadas implementadas con la librería *SweetAlert2*.
+
+* **Navegación Fluida:** Enrutamiento usando *React Router DOM*.
+
+
+
+## 🛠️ Tecnologías 
+
+
+
+* **React** (Hooks: `useState`, `useEffect`)
+
+* **Vite** (Entorno de desarrollo)
+
+* **React Router DOM** (Navegación)
+
+* **React Bootstrap** (Framework CSS y Componentes)
+
+* **SweetAlert2** (Notificaciones/Alertas)
+
+
+
+## 📁 Estructura del Proyecto
+
+```text
+
+📦 tienda-online
+
+ ┣ 📂 public                   # Recursos estáticos públicos
+
+ ┃ ┗ 🖼️ BLogoDark.png
+
+ ┣ 📂 src                      # Código fuente de la aplicación
+
+ ┃ ┣ 📂 assets                 # Imágenes locales (Hero, pósters de películas, etc.)
+
+ ┃ ┣ 📂 components             # Componentes reutilizables
+
+ ┃ ┃ ┣ ⚛️ Header.jsx
+
+ ┃ ┃ ┣ ⚛️ InputGroup.jsx
+
+ ┃ ┃ ┣ ⚛️ MensajeExito.jsx
+
+ ┃ ┃ ┗ ⚛️ TarjetaPelicula.jsx
+
+ ┃ ┣ 📂 data                   # Mock de datos (Simulación de Base de Datos)
+
+ ┃ ┃ ┣ 📄 imagenes.js
+
+ ┃ ┃ ┗ 📄 productos.js
+
+ ┃ ┣ 📂 pages                  # Vistas principales (Páginas)
+
+ ┃ ┃ ┣ ⚛️ Carrito.jsx
+
+ ┃ ┃ ┣ ⚛️ Contacto.jsx
+
+ ┃ ┃ ┣ ⚛️ DetalleProducto.jsx
+
+ ┃ ┃ ┣ ⚛️ Inicio.jsx
+
+ ┃ ┃ ┗ ⚛️ Productos.jsx
+
+ ┃ ┣ 📂 utils                  # Funciones utilitarias globales
+
+ ┃ ┃ ┗ 📄 alertas.js
+
+ ┃ ┣ ⚛️ App.jsx                # Componente raíz y enrutador central
+
+ ┃ ┣ 🎨 index.css              # Estilos globales y reseteo
+
+ ┃ ┗ ⚛️ main.jsx               # Punto de entrada de React
+
+ ┣ 📄 index.html
+
+ ┣ 📄 package.json             # Dependencias y scripts
+
+ ┣ 📄 vite.config.js
+
+ ┗ 📄 README.md
