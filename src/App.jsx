@@ -9,7 +9,13 @@ import Contacto from './pages/Contacto';
 import { productos } from './data/productos';
 import { mostrarAlertaCompraExitosa } from './utils/alertas';
 
+
 function App() {
+
+  const [tema, setTema] = useState(() => {
+    const temaGuardado = localStorage.getItem("temaBlockbuster");
+    return temaGuardado ? temaGuardado : "light";
+  });
 
   // Estado del carrito con Lazy Initialization (leer la memoria directamente adentro del useState para evitar leerla en cada renderizado)
   const [carrito, setCarrito] = useState(() => {
@@ -21,6 +27,16 @@ function App() {
   useEffect(() => {
     localStorage.setItem("carritoBlockbuster", JSON.stringify(carrito));
   }, [carrito]);
+
+  /* inyecto el attributo al html y obtengo desde localStorage la seleccion*/
+  useEffect(() => {
+    document.documentElement.setAttribute("data-bs-theme", tema);
+    localStorage.setItem("temaBlockbuster", tema);
+  }, [tema]);
+
+  const alternarTema = () => {
+    setTema((temaAnterior) => (temaAnterior === "light" ? "dark" : "light"));
+  };
 
   /* Esto va a servir como estado donde contiene todas las peliculas. */
 
@@ -94,7 +110,8 @@ function App() {
   return (
     <BrowserRouter>
       {/* El Header queda afuera de Routes para que se muestre en todas las pantallas */}
-      <Header carrito={carrito} /> 
+      {/* Pasamos el tema actual y la función para cambiarlo al Header */}
+      <Header carrito={carrito} tema={tema} alternarTema={alternarTema} />
       
       <main>
         <Routes>

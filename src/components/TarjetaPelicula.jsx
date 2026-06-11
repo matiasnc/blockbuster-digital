@@ -15,8 +15,8 @@ function TarjetaPelicula({ pelicula, onAlquilar }) {
           style={{ 
             height: '350px', 
             objectFit: 'contain', 
-            backgroundColor: '#f8f9fa',
-            padding: '10px'
+            //este color cambia solo según el tema
+            backgroundColor: 'var(--bs-tertiary-bg)',padding: '10px'
           }} 
         />
       </Link>

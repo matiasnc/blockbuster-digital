@@ -32,7 +32,7 @@ function Productos({ productos, agregarAlCarrito }) {
     <Container className="my-5">
       <h2 className="mb-4 text-center">Catálogo de Películas</h2>
 
-      <Row className="mb-5 justify-content-center bg-light p-4 rounded shadow-sm">
+      <Row className="mb-5 justify-content-center bg-body-tertiary p-4 rounded shadow-sm">
         <Col md={5} className="mb-3 mb-md-0">
           <Form.Group>
             <Form.Label className="fw-bold">Buscar por título</Form.Label>

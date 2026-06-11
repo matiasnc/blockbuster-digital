@@ -79,7 +79,7 @@ function Inicio() {
       {/*
         Explicación de cómo funciona el sitio.
       */}
-      <section className="bg-light py-5">
+      <section className="bg-body-tertiary py-5">
         <Container>
 
           <h2 className="text-center mb-4">
