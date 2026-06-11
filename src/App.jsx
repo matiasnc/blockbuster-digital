@@ -91,6 +91,16 @@ function App() {
       pelicula => pelicula.id !== id
       )
     );
+    setListaProductos(
+      listaProductos.map(pelicula => 
+        pelicula.id === id
+        ? {
+          ...pelicula,
+          stock: pelicula.stock + 1
+        }
+        : pelicula
+      )
+    )
   };
   
   const finalizarCompra = () => {
@@ -121,7 +131,10 @@ function App() {
           productos = {listaProductos} 
           agregarAlCarrito = {agregarAlCarrito}
           />} /> }
-          { <Route path="/pelicula/:id" element={<DetalleProducto agregarAlCarrito={agregarAlCarrito} />} /> }
+          { <Route path="/pelicula/:id" element={<DetalleProducto 
+          agregarAlCarrito={agregarAlCarrito}
+          productos={listaProductos} 
+          />} /> }
           { <Route path="/carrito" element={<Carrito 
           carrito = {carrito}
           eliminarDelCarrito={eliminarDelCarrito}

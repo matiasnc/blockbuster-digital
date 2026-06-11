@@ -1,9 +1,8 @@
 import { useParams, Link } from 'react-router-dom';
 import { Container, Row, Col, Button, Badge, Card } from 'react-bootstrap';
 import { mostrarAlertaCarrito } from '../utils/alertas'; 
-import { productos } from '../data/productos'; 
 
-const DetalleProducto = ({ agregarAlCarrito }) => {
+const DetalleProducto = ({ agregarAlCarrito, productos }) => {
   const { id } = useParams();
   
   const producto = productos.find(p => p.id === parseInt(id));
