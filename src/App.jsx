@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from './components/Header';
 import Inicio from './pages/Inicio';
 import Productos from './pages/Productos';
@@ -10,8 +10,17 @@ import { productos } from './data/productos';
 import { mostrarAlertaCompraExitosa } from './utils/alertas';
 
 function App() {
-  // Estado del carrito
-  const [carrito, setCarrito] = useState([]);
+
+  // Estado del carrito con Lazy Initialization (leer la memoria directamente adentro del useState para evitar leerla en cada renderizado)
+  const [carrito, setCarrito] = useState(() => {
+    const carritoGuardado = localStorage.getItem("carritoBlockbuster");
+    // Si hay algo se devuelve si no array []
+    return carritoGuardado ? JSON.parse(carritoGuardado) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("carritoBlockbuster", JSON.stringify(carrito));
+  }, [carrito]);
 
   /* Esto va a servir como estado donde contiene todas las peliculas. */
 
