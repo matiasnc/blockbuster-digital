@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { mostrarAlertaCarrito } from '../utils/alertas';
 import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
+import TarjetaPelicula from '../components/TarjetaPelicula';
 
 function Productos({ productos, agregarAlCarrito }) {
 
@@ -35,9 +36,9 @@ function Productos({ productos, agregarAlCarrito }) {
         <Col md={5} className="mb-3 mb-md-0">
           <Form.Group>
             <Form.Label className="fw-bold">Buscar por título</Form.Label>
-            <Form.Control 
-              type="text" 
-              placeholder="Ej: Matrix, El Padrino..." 
+            <Form.Control
+              type="text"
+              placeholder="Ej: Matrix, El Padrino..."
               value={busqueda}
               onChange={(e) => setBusqueda(e.target.value)} // Actualizamos el estado cada vez que el usuario escribe
             />
@@ -47,8 +48,8 @@ function Productos({ productos, agregarAlCarrito }) {
         <Col md={5}>
           <Form.Group>
             <Form.Label className="fw-bold">Filtrar por género</Form.Label>
-            <Form.Select 
-              value={filtroGenero} 
+            <Form.Select
+              value={filtroGenero}
               // Actualizamos el estado cuando el usuario selecciona una opción
               onChange={(e) => setFiltroGenero(e.target.value)}
             >
@@ -67,54 +68,19 @@ function Productos({ productos, agregarAlCarrito }) {
         {productosFiltrados.length > 0 ? (
           productosFiltrados.map((pelicula) => (
             <Col key={pelicula.id} xs={12} sm={6} md={4} lg={3} className="mb-4">
-              <Card className="h-100 shadow-sm">
-                <Link to={`/pelicula/${pelicula.id}`}>
-                  <Card.Img
-                    variant="top"
-                    src={pelicula.imagen}
-                    alt={pelicula.titulo}
-                    style={{ height: '350px', objectFit: 'cover' }}
-                  />
-                </Link>
-
-                <Card.Body className="d-flex flex-column">
-                  <Card.Title>{pelicula.titulo}</Card.Title>
-                  <Card.Subtitle className="mb-2 text-muted">{pelicula.genero}</Card.Subtitle>
-
-                  <Card.Text>
-                    {pelicula.sinopsis.substring(0, 80)}...
-                  </Card.Text>
-
-                  <h5 className="text-center mb-3">${pelicula.precio}</h5>
-
-                  <div className="mt-auto d-flex flex-column gap-2">
-                    {pelicula.stock === 0 ? (
-                      <Button variant="secondary" disabled>
-                        Agotado
-                      </Button>
-                    ) : (
-                      <Button
-                        variant="dark"
-                        onClick={() => handleAgregar(pelicula)}
-                      >
-                        Alquilar
-                      </Button>
-                    )}
-
-                    <Button as={Link} to={`/pelicula/${pelicula.id}`} variant="outline-dark">
-                      Ver detalle
-                    </Button>
-                  </div>
-                </Card.Body>
-              </Card>
+              {/* Pasamos la película y en onAlquilar mapeamos tu función handleAgregar */}
+              <TarjetaPelicula
+                pelicula={pelicula}
+                onAlquilar={handleAgregar}
+              />
             </Col>
           ))
         ) : (
           // Mensaje por si la búsqueda no arroja resultados
           <Col xs={12} className="text-center py-5">
             <h4 className="text-muted">No se encontraron películas con esos filtros.</h4>
-            <Button 
-              variant="warning" 
+            <Button
+              variant="warning"
               className="mt-3"
               onClick={() => { setBusqueda(''); setFiltroGenero(''); }}
             >

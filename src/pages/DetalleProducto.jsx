@@ -87,7 +87,7 @@ const DetalleProducto = ({ agregarAlCarrito }) => {
                   </Button>
                   
                   <Link to="/catalogo">
-                    <Button variant="outline-secondary" size="lg" className="px-4 py-2">
+                    <Button variant="dark" size="lg" className="px-4 py-2">
                       Volver al catálogo
                     </Button>
                   </Link>

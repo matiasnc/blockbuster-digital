@@ -2,6 +2,7 @@ import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { productos } from "../data/productos";
 import imagenPrincipal from "../assets/imagenPrincipal.jpeg";
+import TarjetaPelicula from '../components/TarjetaPelicula';
 
 function Inicio() {
   return (
@@ -63,63 +64,11 @@ function Inicio() {
             Películas destacadas
           </h2>
 
-          {/* <Row>
-            {productos.slice(0, 4).map((pelicula) => (
-              <Col key = {pelicula.id} md = {3} sm = {6} className = "mb-4">
-                <Card>
-                  <Card.Img
-                    variant = "top"
-                    src = {pelicula.imagen}
-                    alt = {pelicula.titulo}
-                  />
-
-                  <Card.Body>
-                    <Card.Title>
-                     {pelicula.titulo}
-                    </Card.Title>
-
-                    <Card.Text>
-                      {pelicula.genero}
-                    </Card.Text>
-
-                    <Button as={Link} to={`/pelicula/${pelicula.id}`} variant="outline-dark">
-                      Ver detalle
-                    </Button>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row> */}
           <Row className="align-items-stretch">
             {productos.slice(0, 4).map((pelicula) => (
               <Col key={pelicula.id} md={3} sm={6} className="mb-4">
-                {/* h-100 hace que todas las tarjetas ocupen el 100% del alto de la columna */}
-                <Card className="h-100 shadow-sm">
-
-                  {/* Pongo la imagen dentro de Link para que tambien se clickeacble. */}
-                  <Link to={`/pelicula/${pelicula.id}`}>
-                    <Card.Img
-                      variant="top"
-                      src={pelicula.imagen}
-                      alt={pelicula.titulo}
-                      style={{ height: '350px', objectFit: 'cover' }}
-                    />
-                  </Link>
-
-                  <Card.Body className="d-flex flex-column">
-                    <Card.Title>{pelicula.titulo}</Card.Title>
-                    <Card.Text>{pelicula.genero}</Card.Text>
-
-                    <Button
-                      as={Link}
-                      to={`/pelicula/${pelicula.id}`}
-                      variant="outline-dark"
-                      className="mt-auto"
-                    >
-                      Ver detalle
-                    </Button>
-                  </Card.Body>
-                </Card>
+                {/* Aca no se pasa onAlquilar porque en Inicio no lleva ese botón */}
+                <TarjetaPelicula pelicula={pelicula} />
               </Col>
             ))}
           </Row>
