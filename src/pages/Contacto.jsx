@@ -91,7 +91,6 @@ const Contacto = () => {
               type="submit" 
               size="lg"
               className="w-100 fw-bold mt-2" 
-              // ¡El botón ahora está siempre habilitado!
             >
               Enviar Mensaje
             </Button>
