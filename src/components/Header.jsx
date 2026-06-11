@@ -8,7 +8,14 @@ function Header({ carrito, tema, alternarTema }) {
   return (
     <Navbar bg={tema === 'light' ? 'light' : 'dark'} variant={tema} expand="lg" className="shadow-sm">
       <Container>
-        <Navbar.Brand as={Link} to="/">🍿 Blockbuster Digital</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">
+          <img
+            src="/BLogoDark.png"
+            alt="Logo Blockbuster"
+            style={{ width: '30px', marginRight: '10px', marginBottom: '5px' }}
+          />
+          Blockbuster Digital
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
