@@ -87,7 +87,7 @@ const Contacto = () => {
             </Form.Group>
 
             <Button 
-              variant="primary" 
+              variant="dark" 
               type="submit" 
               size="lg"
               className="w-100 fw-bold mt-2" 
