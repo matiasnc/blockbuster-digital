@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState } from "react";
 import Header from './components/Header';
 import Inicio from './pages/Inicio';
-import './App.css';
 
 import Productos from './pages/Productos';
 import DetalleProducto from './pages/DetalleProducto';
