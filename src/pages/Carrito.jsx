@@ -5,6 +5,7 @@
 // Eliminar alguna de las peliculas
 // Comprar
 
+
 import { Container, Card, Button, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
