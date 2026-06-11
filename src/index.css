@@ -54,7 +54,7 @@ body {
   margin: 0;
 }
 
-#root {
+/*#root {
   width: 1126px;
   max-width: 100%;
   margin: 0 auto;
@@ -64,6 +64,14 @@ body {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+}*/
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  /* Quito el text-align, el border-inline y el width estricto que mostraba "columnas" a los costados. */
 }
 
 h1,
