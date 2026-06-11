@@ -15,7 +15,8 @@ function Inicio() {
           <Row className="align-items-center">
 
             {/* Texto principal */}
-            <Col md={6}>
+            {/* text-center centra en celulares, text-md-start lo vuelve a poner a la izquierda en PC */}
+            <Col md={6} className="text-center text-md-start mb-4 mb-md-0">
               <h1 className="display-4 fw-bold">
                 Blockbuster Digital
               </h1>
