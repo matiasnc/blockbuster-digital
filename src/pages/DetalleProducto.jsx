@@ -1,16 +1,18 @@
 import { useParams, Link } from 'react-router-dom';
 import { Container, Row, Col, Button, Badge, Card } from 'react-bootstrap';
-
-
+import { mostrarAlertaCarrito } from '../utils/alertas'; 
 import { productos } from '../data/productos'; 
 
-const DetalleProducto = ({agregarAlCarrito}) => {
+const DetalleProducto = ({ agregarAlCarrito }) => {
   const { id } = useParams();
-  
   
   const producto = productos.find(p => p.id === parseInt(id));
 
-  
+  const handleAgregar = (pelicula) => {
+    const exito = agregarAlCarrito(pelicula);
+    mostrarAlertaCarrito(exito, pelicula.titulo);
+  };
+
   if (!producto) {
     return (
       <Container className="text-center py-5">
@@ -24,14 +26,11 @@ const DetalleProducto = ({agregarAlCarrito}) => {
 
   return (
     <Container className="py-5">
-      {/* Usamos una Card grande que envuelve todo para darle un borde limpio y sombra */}
       <Card className="shadow-lg border-0 overflow-hidden">
         <Row className="g-0">
           
-          {/* COLUMNA IZQUIERDA: Imagen */}
           <Col md={5} className="bg-dark d-flex align-items-center justify-content-center p-4">
             <img 
-              // Si usaste "img" o "portada" en tu array, cámbialo aquí
               src={producto.imagen} 
               alt={producto.titulo} 
               className="img-fluid rounded shadow"
@@ -39,12 +38,9 @@ const DetalleProducto = ({agregarAlCarrito}) => {
             />
           </Col>
 
-          {/* COLUMNA DERECHA: Información y Botones */}
           <Col md={7}>
-            {/* h-100 y d-flex flex-column nos permiten empujar los botones siempre hacia abajo */}
             <Card.Body className="p-4 p-md-5 d-flex flex-column h-100">
               
-              {/* Categoría / Género */}
               <div className="mb-3">
                 <Badge bg="info" className="me-2 px-3 py-2 text-uppercase fs-6">
                   {producto.categoria || producto.genero}
@@ -56,22 +52,18 @@ const DetalleProducto = ({agregarAlCarrito}) => {
                 )}
               </div>
 
-              {/* Título de la película */}
               <Card.Title as="h1" className="fw-bold mb-3 text-dark display-5">
                 {producto.titulo}
               </Card.Title>
               
-              {/* Precio */}
               <Card.Text as="h2" className="text-primary fw-bold mb-4">
                 ${producto.precio?.toLocaleString('es-AR')}
               </Card.Text>
 
-              {/* Sinopsis / Descripción */}
               <Card.Text className="lead text-secondary mb-4">
                 {producto.descripcion || producto.sinopsis}
               </Card.Text>
 
-              {/* Contenedor inferior (Stock y Botones) que se empuja hacia el fondo */}
               <div className="mt-auto border-top pt-4">
                 <div className="mb-4">
                   <span className="fw-bold fs-5">
@@ -83,24 +75,13 @@ const DetalleProducto = ({agregarAlCarrito}) => {
                   </span>
                 </div>
 
-                {/* Botones */}
                 <div className="d-grid gap-3 d-md-flex justify-content-md-start">
                   <Button 
                     variant="warning" 
                     size="lg"
                     className="px-4 py-2 fw-bold"
                     disabled={producto.stock === 0}
-                    onClick={() => {
-
-                      const agregado = agregarAlCarrito(producto);
-
-                      if (agregado) {
-                        alert('Película agregada al carrito');
-                      } else {
-                        alert('La película ya está en el carrito');
-                      }
-
-                    }}
+                    onClick={() => handleAgregar(producto)}
                   >
                   {producto.stock === 0 ? 'Agotada' : 'Agregar al carrito'}
                   </Button>
