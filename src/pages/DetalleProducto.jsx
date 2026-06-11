@@ -86,7 +86,7 @@ const DetalleProducto = ({agregarAlCarrito}) => {
                 {/* Botones */}
                 <div className="d-grid gap-3 d-md-flex justify-content-md-start">
                   <Button 
-                    variant="primary" 
+                    variant="warning" 
                     size="lg"
                     className="px-4 py-2 fw-bold"
                     disabled={producto.stock === 0}
@@ -102,7 +102,7 @@ const DetalleProducto = ({agregarAlCarrito}) => {
 
                     }}
                   >
-                    {producto.stock === 0 ? 'Agotada' : 'Agregar al carrito'}
+                  {producto.stock === 0 ? 'Agotada' : 'Agregar al carrito'}
                   </Button>
                   
                   <Link to="/catalogo">

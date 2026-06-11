@@ -90,8 +90,7 @@ function Productos({ productos, agregarAlCarrito }) {
                     </Button>
                   ) : (
                     <Button
-                      variant="primary"
-                      // Asegurate de que la prop agregarAlCarrito esté bien pasada
+                      variant="warning"
                       onClick={() => agregarAlCarrito(pelicula)}
                     >
                       Alquilar
