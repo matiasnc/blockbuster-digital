@@ -4,8 +4,33 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function Productos({ productos, agregarAlCarrito }) {
+
+  // Funcion para manejar alerta con sweetalert2 al agregar un producto al carrito
+  const handleAgregar = (pelicula) => {
+    // Intentamos agregarla y guardamos el resultado (true o false)
+    const exito = agregarAlCarrito(pelicula);
+
+    if (exito) {
+      Swal.fire({
+        title: "¡Agregada!",
+        text: `Sumaste "${pelicula.titulo}" a tu carrito.`,
+        icon: "success",
+        timer: 2000, // Se cierra solo a los 2 segundos
+        showConfirmButton: true
+      });
+    } else {
+      Swal.fire({
+        title: "Ups...",
+        text: "Esta película ya está en tu carrito.",
+        icon: "error",
+        confirmButtonColor: "#030303"
+      });
+    }
+  };
+
   return (
     <Container className="my-5">
       <h2 className="mb-4 text-center">Catálogo de Películas</h2>
