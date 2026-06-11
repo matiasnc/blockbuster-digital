@@ -1,14 +1,13 @@
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { productos } from "../data/productos";
-import  imagenPrincipal  from "../assets/imagenPrincipal.jpeg";
+import imagenPrincipal from "../assets/imagenPrincipal.jpeg";
 
 function Inicio() {
   return (
-    <> {/*esto es React.Fragment, se utiliza para agrupar varias secciones sin agregar un div extra.*/ }
+    <>{/*esto es React.Fragment, se utiliza para agrupar varias secciones sin agregar un div extra.*/}
       {/* 
         Sección principal de bienvenida.
-        
       */}
       <section className="bg-dark text-light py-5">
         <Container>
@@ -39,7 +38,7 @@ function Inicio() {
             {/* Imagen principal */}
             <Col md={6}>
               <img
-                src= {imagenPrincipal}
+                src={imagenPrincipal}
                 alt="Imagen principal"
                 className="img-fluid rounded"
               />
@@ -64,7 +63,7 @@ function Inicio() {
             Películas destacadas
           </h2>
 
-          <Row>
+          {/* <Row>
             {productos.slice(0, 4).map((pelicula) => (
               <Col key = {pelicula.id} md = {3} sm = {6} className = "mb-4">
                 <Card>
@@ -90,13 +89,45 @@ function Inicio() {
                 </Card>
               </Col>
             ))}
+          </Row> */}
+          <Row className="align-items-stretch">
+            {productos.slice(0, 4).map((pelicula) => (
+              <Col key={pelicula.id} md={3} sm={6} className="mb-4">
+                {/* h-100 hace que todas las tarjetas ocupen el 100% del alto de la columna */}
+                <Card className="h-100 shadow-sm">
+
+                  {/* Pongo la imagen dentro de Link para que tambien se clickeacble. */}
+                  <Link to={`/pelicula/${pelicula.id}`}>
+                    <Card.Img
+                      variant="top"
+                      src={pelicula.imagen}
+                      alt={pelicula.titulo}
+                      style={{ height: '350px', objectFit: 'cover' }}
+                    />
+                  </Link>
+
+                  <Card.Body className="d-flex flex-column">
+                    <Card.Title>{pelicula.titulo}</Card.Title>
+                    <Card.Text>{pelicula.genero}</Card.Text>
+
+                    <Button
+                      as={Link}
+                      to={`/pelicula/${pelicula.id}`}
+                      variant="outline-dark"
+                      className="mt-auto"
+                    >
+                      Ver detalle
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
           </Row>
         </Container>
       </section>
 
       {/*
-        Explicación sencilla de cómo funciona el sitio.
-        
+        Explicación de cómo funciona el sitio.
       */}
       <section className="bg-light py-5">
         <Container>
@@ -126,7 +157,7 @@ function Inicio() {
         </Container>
       </section>
 
-      {/* Bueno, un Footer sencillo, no se si lo vamos a cambiar más adelante. */}
+      {/* Footer simple */}
 
       <footer className="bg-dark text-light text-center py-3">
         <p>© 2026 Blockbuster Digital</p>
