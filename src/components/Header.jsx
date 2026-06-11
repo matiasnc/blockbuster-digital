@@ -25,7 +25,7 @@ function Header({ carrito }) {
           {/* El carrito a la derecha */}
           <Nav>
             <Nav.Link as={NavLink} to="/carrito">
-              🛒 Carrito <Badge bg="primary">{carrito.length}</Badge>
+              🛒 Carrito <Badge bg="warning" text="dark">{carrito.length}</Badge>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
