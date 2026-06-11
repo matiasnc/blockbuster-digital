@@ -19,3 +19,13 @@ export const mostrarAlertaCarrito = (exito, titulo) => {
     });
   }
 };
+
+export const mostrarAlertaCompraExitosa = () => {
+  Swal.fire({
+    title: "¡Compra exitosa!",
+    text: "Compra realizada con éxito, se enviarán los datos a tu email asociado.",
+    icon: "success",
+    confirmButtonColor: "#ffc107",
+    confirmButtonText: "¡Listo!"
+  });
+};

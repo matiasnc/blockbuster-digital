@@ -2,15 +2,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState } from "react";
 import Header from './components/Header';
 import Inicio from './pages/Inicio';
-
 import Productos from './pages/Productos';
 import DetalleProducto from './pages/DetalleProducto';
 import Carrito from './pages/Carrito';
 import Contacto from './pages/Contacto';
-
-
-import { productos } from './data/productos'; // Import necesario para el const de listaProductos y setListaProductos.
-
+import { productos } from './data/productos';
+import { mostrarAlertaCompraExitosa } from './utils/alertas';
 
 function App() {
   // Estado del carrito
@@ -72,20 +69,18 @@ function App() {
   };
   
   const finalizarCompra = () => {
-    alert("¡Compra realizada con éxito!");
+    mostrarAlertaCompraExitosa();
     setCarrito([]);
-  }
-
-
+  };
 
   //Elimina todas las películas del carrito.
   
   /*const vaciarCarrito = () => {
    setCarrito([]);
   };
-  Todavia no la necesitamos.
+  Todavia no la necesitamos. Podria ser una mejora.
   */
- /*Pense hacerlo todo aca porque como necesitamos el carrito se quede en la pagina actual tambien, nada eso. */
+  /*Pense hacerlo todo aca porque como necesitamos el carrito se quede en la pagina actual tambien, nada eso. */
   
   return (
     <BrowserRouter>
